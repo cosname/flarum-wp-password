@@ -3,7 +3,7 @@
 namespace Cosname\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Flarum\Core\User;
+use Flarum\User\User;
 use Hautelook\Phpass\PasswordHash;
 use Cosname\Hashing\WpHasher;
 
