@@ -27,7 +27,7 @@
         "flarum-extension": {
             "title": "WP Password",
             "icon": {
-                "name": "wordpress",
+                "name": "fab fa-wordpress",
                 "backgroundColor": "#ddd",
                 "color": "#333"
             }
