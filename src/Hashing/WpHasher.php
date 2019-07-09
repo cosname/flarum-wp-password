@@ -3,10 +3,11 @@
 namespace Cosname\Hashing;
 
 use Hautelook\Phpass\PasswordHash;
+use Illuminate\Hashing\AbstractHasher;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
-class WpHasher implements HasherContract
+class WpHasher extends AbstractHasher implements HasherContract
 {
     /**
      * @var \Hautelook\Phpass\PasswordHash
