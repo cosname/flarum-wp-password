@@ -4,7 +4,7 @@ namespace Cosname\Hashing;
 
 use Hautelook\Phpass\PasswordHash;
 use Illuminate\Hashing\AbstractHasher;
-use Illuminate\Hashing\BcryptHasher;
+use Illuminate\Hashing\HashManager;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
 class WpHasher extends AbstractHasher implements HasherContract
@@ -15,20 +15,20 @@ class WpHasher extends AbstractHasher implements HasherContract
     protected static $wp_hasher;
 
     /**
-     * @var \Illuminate\Hashing\BcryptHasher
+     * @var \Illuminate\Hashing\HashManager
      */
-    protected static $bcrypt_hasher;
+    protected static $flarum_hasher;
 
     /**
      * Set the hashers with which to hash passwords.
      *
      * @param PasswordHash $wp_hasher
-     * @param BcryptHasher $bcrypt_hasher
+     * @param HashManager $flarum_hasher
      */
-    public static function setHashers(PasswordHash $wp_hasher, BcryptHasher $bcrypt_hasher)
+    public static function setHashers(PasswordHash $wp_hasher, HashManager $flarum_hasher)
     {
         static::$wp_hasher = $wp_hasher;
-        static::$bcrypt_hasher = $bcrypt_hasher;
+        static::$flarum_hasher = $flarum_hasher;
     }
 
     /**
@@ -40,7 +40,7 @@ class WpHasher extends AbstractHasher implements HasherContract
      */
     public function make($value, array $options = [])
     {
-        return WpHasher::$bcrypt_hasher->make($value);
+        return WpHasher::$flarum_hasher->make($value);
     }
 
     /**
@@ -60,7 +60,7 @@ class WpHasher extends AbstractHasher implements HasherContract
 
         // If the stored hash is longer than an MD5, try both hashers
         return WpHasher::$wp_hasher->CheckPassword($value, $hashedValue) ||
-               WpHasher::$bcrypt_hasher->check($value, $hashedValue, $options);
+               WpHasher::$flarum_hasher->check($value, $hashedValue, $options);
     }
 
     /**
@@ -72,6 +72,6 @@ class WpHasher extends AbstractHasher implements HasherContract
      */
      public function needsRehash($hashedValue, array $options = [])
      {
-         return WpHasher::$bcrypt_hasher->needsRehash($hashedValue, $options);
+         return WpHasher::$flarum_hasher->needsRehash($hashedValue, $options);
      }
 }
