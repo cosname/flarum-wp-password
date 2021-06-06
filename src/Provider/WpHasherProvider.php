@@ -1,6 +1,6 @@
 <?php
 
-namespace Cosname\Providers;
+namespace Cosname\Provider;
 
 use Illuminate\Support\ServiceProvider;
 use Flarum\User\User;
