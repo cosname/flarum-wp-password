@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Foundation\Application;
+use Flarum\Extend;
+use Cosname\Provider;
 
 return [
-    function (Dispatcher $events, Application $app) {
-        $app->register(Cosname\Providers\WpHasherProvider::class);
-    }
+    (new Extend\ServiceProvider)
+        ->register(Provider\WpHasherProvider::class)
 ];
